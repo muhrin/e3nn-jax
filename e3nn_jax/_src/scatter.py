@@ -115,7 +115,7 @@ def scatter_mean(
             den = den[..., None]
 
         output = total / den.astype(total.dtype)
-        output = jax.tree_map(
+        output = jax.tree.map(
             lambda x: jnp.repeat(x, nel, axis=0, total_repeat_length=data.shape[0]),
             output,
         )
