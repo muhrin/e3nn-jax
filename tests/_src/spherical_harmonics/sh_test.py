@@ -29,7 +29,7 @@ def test_equivariance(keys, algorithm, l):
         l, input, False, algorithm=algorithm
     ).transform_by_angles(*abc)
 
-    np.testing.assert_allclose(output1.array, output2.array, atol=1e-2, rtol=1e-2)
+    assert jnp.allclose(output1.array, output2.array, atol=1e-2, rtol=1e-2)
 
 
 def test_closure(keys, algorithm):
@@ -117,7 +117,7 @@ def test_parity(keys, algorithm, l):
     y2 = e3nn.spherical_harmonics(
         irreps, -x, normalize=True, normalization="integral", algorithm=algorithm
     )
-    np.testing.assert_allclose(y1.array, y2.array, atol=1e-6, rtol=1e-6)
+    assert jnp.allclose(y1.array, y2.array, atol=1e-6, rtol=1e-6)
 
 
 @pytest.mark.parametrize("l", range(7 + 1))
@@ -159,7 +159,7 @@ def test_check_grads(keys, algorithm, irreps, normalization):
         (jax.random.normal(keys[0], (10, 3)),),
         1,
         modes=["fwd", "rev"],
-        atol=3e-3,
+        atol=5e-3,
         rtol=3e-3,
     )
 

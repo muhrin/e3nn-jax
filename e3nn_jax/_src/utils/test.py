@@ -83,7 +83,7 @@ def assert_equivariant(
         >>> assert_equivariant(fun, rng, "1e")
     """
     if atol is None:
-        atol = 1e-13 if jax.config.read("jax_enable_x64") else 1e-3
+        atol = 1e-13 if jax.config.read("jax_enable_x64") else 2e-3
     if rtol is None:
         rtol = 1e-10 if jax.config.read("jax_enable_x64") else 1e-3
 

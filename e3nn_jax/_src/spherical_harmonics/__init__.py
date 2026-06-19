@@ -186,7 +186,7 @@ def _jited_spherical_harmonics(
 
 
 def _spherical_harmonics(
-    ls: Tuple[int, ...], x: jax.Array, normalization: str, algorithm: Tuple[str]
+    ls: tuple[int, ...], x: jax.Array, normalization: str, algorithm: tuple[str]
 ) -> List[jax.Array]:
     if "legendre" in algorithm:
         out = legendre_spherical_harmonics(max(ls), x, False, normalization)
