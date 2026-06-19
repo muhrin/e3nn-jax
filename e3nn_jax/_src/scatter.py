@@ -257,7 +257,7 @@ def _scatter_op(
         elif op == "max":
             return z.at[(dst,)].max(x, indices_are_sorted=indices_are_sorted, mode=mode)
 
-    output = jax.tree_util.tree_map(_op, data)
+    output = jax.tree.map(_op, data)
 
     if map_back:
         output = output[(dst,)]
