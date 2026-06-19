@@ -56,9 +56,7 @@ def vmap(
             to_via, (args, kwargs), is_leaf=lambda x: isinstance(x, e3nn.IrrepsArray)
         )
         out = jax.vmap(inside_fun, in_axes, out_axes)(*args, **kwargs)
-        return jax.tree.map(
-            from_via, out, is_leaf=lambda x: isinstance(x, _VIA)
-        )
+        return jax.tree.map(from_via, out, is_leaf=lambda x: isinstance(x, _VIA))
 
     return outside_fun
 
