@@ -176,7 +176,7 @@ def test_normalize(keys, algorithm, l):
     y2 = e3nn.spherical_harmonics(
         e3nn.Irreps([l]), x, normalize=False, algorithm=algorithm
     ).array
-    np.testing.assert_allclose(y1, y2, atol=1e-6, rtol=1e-5)
+    assert jnp.allclose(y1, y2, atol=1e-6, rtol=1e-5)
 
 
 def test_edge_cases():
