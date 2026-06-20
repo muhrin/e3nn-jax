@@ -69,21 +69,21 @@ def test_cartesian(keys):
 def test_generator_x(l, jac):
     G1 = generators(l)[0]
     G2 = jac(wigner_D, 2)(l, 0.0, 0.0, 0.0)
-    jnp.allclose(G1, G2, atol=1e-5, rtol=1e-5)
+    assert jnp.allclose(G1, G2, atol=1e-5, rtol=1e-5)
 
 
 @pytest.mark.parametrize("l", range(1, 11 + 1))
 def test_generator_y(l):
     G1 = generators(l)[1]
     G2 = jax.jacobian(wigner_D, 1)(l, 0.0, 0.0, 0.0)
-    assert jnp.abs(G2 - G1).max() < 1e-6
+    assert jnp.allclose(G1, G2, atol=1e-5, rtol=1e-5)
 
 
 @pytest.mark.parametrize("l", range(1, 11 + 1))
 def test_generator_z(l):
     G1 = generators(l)[2]
     G2 = jax.jacobian(wigner_D, 2)(l, -math.pi / 2, 0.0, math.pi / 2)
-    assert jnp.abs(G2 - G1).max() < 0.005
+    assert jnp.allclose(G1, G2, atol=2e-5, rtol=1e-5)
 
 
 def commutator(a, b):
