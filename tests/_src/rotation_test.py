@@ -34,17 +34,15 @@ def test_xyz(keys, jac):
     for r in rs:
         a, b = e3nn.xyz_to_angles(r)
         R = e3nn.angles_to_matrix(a, -b, -a)
-        np.testing.assert_allclose(
-            R @ r, np.array([0.0, 1.0, 0.0]), atol=float_tolerance
-        )
+        assert jnp.allclose(R @ r, np.array([0.0, 1.0, 0.0]), atol=float_tolerance)
 
     Ja, Jb = jac(e3nn.xyz_to_angles)(jnp.array([0.0, 1.0, 0.0]))
-    np.testing.assert_allclose(Ja, 0.0, atol=float_tolerance)
-    np.testing.assert_allclose(Jb, 0.0, atol=float_tolerance)
+    assert jnp.allclose(Ja, 0.0, atol=float_tolerance)
+    assert jnp.allclose(Jb, 0.0, atol=float_tolerance)
 
     Ja, Jb = jac(e3nn.xyz_to_angles)(jnp.array([0.0, -1.0, 0.0]))
-    np.testing.assert_allclose(Ja, 0.0, atol=float_tolerance)
-    np.testing.assert_allclose(Jb, 0.0, atol=float_tolerance)
+    assert jnp.allclose(Ja, 0.0, atol=float_tolerance)
+    assert jnp.allclose(Jb, 0.0, atol=float_tolerance)
 
 
 def test_conversions(keys):
